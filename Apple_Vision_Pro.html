@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apple Vision Pro | Apple Blog</title>
+
+<style>
+/* ---------- VARIABLES Y RESET ---------- */
+:root{
+  --apple-blue:#0071e3;
+  --gray-025:#fbfbfc;
+  --gray-050:#f5f5f7;
+  --gray-300:#e5e5e5;
+  --gray-900:#1d1d1f;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  color:var(--gray-900);background:#fff;line-height:1.6;scroll-behavior:smooth;
+}
+img{max-width:100%;display:block;border-radius:14px}
+h1,h2{font-weight:700;letter-spacing:-.01em}
+ul{padding-left:1.2rem}
+
+/* ---------- HEADER ---------- */
+header{
+  position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--gray-300);
+  display:flex;align-items:center;gap:.75rem;padding:.8rem 2rem
+}
+header img{width:28px}
+header span{font-weight:600}
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;height:65vh;min-height:420px;
+  display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;
+  background:url('vision.png') center/cover no-repeat;
+}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.65) 65%)}
+.hero-content{position:relative;padding:0 1.5rem;max-width:800px}
+.hero h1{font-size:clamp(2.2rem,4vw,3.5rem);margin-bottom:.6rem}
+.hero p{font-size:clamp(1rem,1.6vw,1.3rem)}
+
+/* ---------- LAYOUT BASICO ---------- */
+article{max-width:1000px;margin:-4rem auto 4rem;padding:0 1.5rem}
+.card{
+  background:#fff;border-radius:20px;box-shadow:0 12px 28px rgba(0,0,0,.06);
+  padding:2.4rem 2.2rem;margin-top:2.5rem
+}
+.card h2{font-size:1.55rem;margin-bottom:1.1rem}
+
+/* ---------- BLOQUE EVENTO NUEVO ---------- */
+.event{background:var(--gray-025);border-left:4px solid var(--apple-blue);position:relative;overflow:hidden}
+.event::after{content:'';position:absolute;inset:0;border-radius:20px;box-shadow:0 0 0 1px rgba(255,255,255,.6) inset}
+.event-banner{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  background:var(--apple-blue);color:#fff;margin:-2.4rem -2.2rem 2rem -2.2rem;
+  padding:1rem 2rem;border-radius:20px 20px 0 0
+}
+.event-banner h2{margin:0;font-size:1.4rem}
+.event-banner span{font-size:1rem;opacity:.9}
+/* grid de minicards */
+.event-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.8rem
+}
+/* minicard */
+.event-card{
+  background:#fff;border-radius:18px;box-shadow:0 8px 22px rgba(0,0,0,.05);
+  padding:1.8rem 1.6rem;display:flex;flex-direction:column;gap:1rem
+}
+.event-card h3{display:flex;align-items:center;gap:.6rem;font-size:1.15rem;margin:0}
+.event-card h3 svg{width:22px;height:22px;fill:var(--apple-blue)}
+/* lista con tick */
+.icon-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45rem}
+.icon-list li{position:relative;padding-left:1.4rem;font-size:.97rem}
+.icon-list li::before{content:'✓';position:absolute;left:0;top:0;color:var(--apple-blue);font-weight:700}
+/* timeline */
+.programme .timeline{list-style:none;margin:0;padding-left:.5rem;position:relative}
+.programme .timeline::before{content:'';position:absolute;left:0;top:.2rem;bottom:.2rem;width:3px;background:var(--apple-blue);border-radius:2px}
+.timeline li{padding-left:1.4rem;margin-bottom:.6rem;position:relative;font-size:.97rem}
+.timeline li::before{content:'';position:absolute;left:-.41rem;top:.35rem;width:10px;height:10px;background:#fff;border:3px solid var(--apple-blue);border-radius:50%}
+.t-time{display:inline-block;width:3.3rem;font-weight:700;color:var(--apple-blue)}
+
+/* ---------- SPEC CARD ---------- */
+.card.spec{background:linear-gradient(180deg,#fff 0%,#fafafa 100%);box-shadow:0 12px 28px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.04),0 0 0 1px rgba(255,255,255,.6) inset}
+.spec-list{list-style:none;display:flex;flex-direction:column;gap:1.2rem;padding:0}
+.spec-list li{display:flex;gap:.9rem;align-items:flex-start}
+.spec-icon{flex:0 0 38px;height:38px;border-radius:12px;background:var(--gray-050);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.06) inset}
+.spec-icon svg{width:22px;height:22px;fill:var(--apple-blue)}
+.spec-list p{margin:0;font-size:1.05rem;line-height:1.55}
+
+/* ---------- GALLERY / BENEFITS / CTA ---------- */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.3rem}
+.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.benefits .item{background:#fff;border-radius:18px;box-shadow:0 6px 18px rgba(0,0,0,.05);padding:1.6rem;text-align:center;transition:transform .3s}
+.benefits .item:hover{transform:translateY(-4px)}
+.benefits .item svg{width:40px;height:40px;margin:0 auto .75rem;fill:var(--apple-blue)}
+.cta{text-align:center;margin:3.5rem 0;display:flex;flex-direction:column;gap:1rem;align-items:center}
+.cta a{border:2px solid var(--apple-blue);border-radius:999px;padding:.9rem 2.4rem;font-weight:600;text-decoration:none;color:var(--apple-blue);transition:all .3s}
+.cta a:hover{background:var(--apple-blue);color:#fff;transform:translateY(-2px)}
+
+/* ---------- REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease-out,transform .7s cubic-bezier(.2,.8,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:600px){
+  .hero{height:55vh}
+  .spec-icon{flex-basis:32px;height:32px}.spec-icon svg{width:18px;height:18px}
+  .event-banner{padding:1rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="https://www.apple.com/" target="_blank" rel="noopener">
+    <img src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?202105211049" alt="Apple">
+  </a>
+  <span>Apple Blog</span>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Apple Vision Pro</h1>
+    <p>El futuro de la computación espacial empieza aquí.</p>
+  </div>
+</section>
+
+<article>
+
+  <!-- ▸▸  EVENTO  ▸▸ -->
+  <div class="card event reveal">
+    <div class="event-banner">
+      <h2>Apple Digital Experience 2025</h2>
+      <span>10 · Mayo · 2025&nbsp;&nbsp;|&nbsp;&nbsp;Apple Store Puerta del Sol · Madrid</span>
+    </div>
+
+    <div class="event-grid">
+
+      <!-- Objetivos -->
+      <div class="event-card">
+        <h3><svg viewBox="0 0 24 24"><path d="M21 7L9 19l-5.5-5.5 1.4-1.4L9 16.2 19.6 5.6z"/></svg> Objetivos</h3>
+        <ul class="icon-list">
+          <li>Lanzar productos con demos en vivo.</li>
+          <li>Inspirar con experiencia 360°.</li>
+          <li>Generar reviews profesionales.</li>
+          <li>Fidelizar con beneficios exclusivos.</li>
+        </ul>
+      </div>
+
+      <!-- Público -->
+      <div class="event-card">
+        <h3><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 10-5-5 5 5 0 005 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg> Público VIP</h3>
+        <ul class="icon-list">
+          <li>Usuarios leales Apple.</li>
+          <li>Líderes de marketing y tech.</li>
+          <li>Influencers top.</li>
+          <li>Prensa especializada.</li>
+        </ul>
+      </div>
+
+      <!-- Diseño -->
+      <div class="event-card">
+        <h3><svg viewBox="0 0 24 24"><path d="M3 13h2v8H3zm4-6h2v14H7zm4 4h2v10h-2zm4-6h2v16h-2zm4 8h2v8h-2z"/></svg> Diseño del espacio</h3>
+        <ul class="icon-list">
+          <li>Entrada inmersiva Vision 360°.</li>
+          <li>Zonas hands-on por producto.</li>
+          <li>Iluminación reactiva LED.</li>
+          <li>Lounge premium + Apple Music.</li>
+        </ul>
+      </div>
+
+      <!-- Programa -->
+      <div class="event-card programme">
+        <h3><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 00-2 2v15a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 17H5V8h14z"/></svg> Programa</h3>
+        <ul class="timeline">
+          <li><span class="t-time">10:00</span> Bienvenida inmersiva.</li>
+          <li><span class="t-time">10:15</span> Keynote iPhone 2025.</li>
+          <li><span class="t-time">10:45</span> Demo Apple Vision.</li>
+          <li><span class="t-time">11:15</span> Estaciones interactivas.</li>
+          <li><span class="t-time">12:15</span> Networking & prensa.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ▸▸  PRINCIPALES NOVEDADES  ▸▸ -->
+  <div class="card spec reveal">
+    <h2>Principales novedades</h2>
+    <ul class="spec-list">
+      <li><span class="spec-icon"><svg viewBox="0 0 24 24"><path d="M4 5h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 2v8h16V7H4zm7 11h2v2H7v-2h4z"/></svg></span><p><strong>Entorno infinito:</strong> expande tu escritorio más allá de cualquier monitor físico.</p></li>
+      <li><span class="spec-icon"><svg viewBox="0 0 24 24"><path d="M12 5.5l6 6-6 6-6-6 6-6zm0-2.12L3.88 11.5 12 19.62 20.12 11.5 12 3.38z"/></svg></span><p><strong>Captura inmersiva:</strong> graba vídeo espacial 3D y revívelo al instante.</p></li>
+      <li><span class="spec-icon"><svg viewBox="0 0 24 24"><path d="M6 16h12v2H6zM4 8h16v2H4zm2 4h12v2H6z"/></svg></span><p><strong>Apps universales:</strong> usa tus apps de iPhone y iPad flotando a tu alrededor.</p></li>
+      <li><span class="spec-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7v3c0 3.87-3.13 7-7 7s-7-3.13-7-7V9a7 7 0 0 1 7-7zm0 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V9a5 5 0 0 0-5-5zm-.5 4h1v4h-1zm0 5h1v2h-1z"/></svg></span><p><strong>Optic ID:</strong> autenticación ultrasegura por análisis de iris.</p></li>
+    </ul>
+  </div>
+
+  <!-- ▸▸  GALERÍA  ▸▸ -->
+  <div class="card reveal">
+    <h2>Visión en acción</h2>
+    <div class="gallery">
+      <figure><img src="vision-inmersive.png" alt="Demo inmersiva"></figure>
+      <figure><img src="vision-caption.png" alt="Captura espacial"></figure>
+      <figure><img src="vision-gesture.png" alt="Gestos interactivos"></figure>
+    </div>
+  </div>
+
+  <!-- ▸▸  BENEFICIOS  ▸▸ -->
+  <div class="card reveal">
+    <h2>Beneficios exclusivos</h2>
+    <div class="benefits">
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></svg><p>Gift bag limitada</p></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M21 7L9 19l-5.5-5.5 1.42-1.42L9 16.17 19.59 5.59z"/></svg><p>Descuentos exclusivos</p></div>
+      <div class="item"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 100 16 8 8 0 000-16zm1 14.93c-2.89.49-5.57-1.45-6.06-4.34a4.993 4.993 0 016.06 4.34z"/></svg><p>Sorteo Apple One</p></div>
+    </div>
+  </div>
+
+  <!-- ▸▸  CTA  ▸▸ -->
+  <div class="cta reveal">
+    <h2>¿Te apuntas?</h2>
+    <a href="https://apple.com/apple-digital-experience-2025" target="_blank" rel="noopener">Reserva tu plaza</a>
+  </div>
+
+</article>
+
+<!-- ---------- REVEAL SCRIPT ---------- -->
+<script>
+const o=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:.25});
+document.querySelectorAll('.reveal').forEach(el=>o.observe(el));
+</script>
+</body>
+</html>
