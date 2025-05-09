@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iPhone 15 Pro — análisis de @TechPablo</title>
+
+<style>
+/* ─── variables ─── */
+:root{
+  --blue:#0071e3;
+  --border:#e7e7e7;
+  --txt:#1d1d1f;
+}
+
+/* ─── reset ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:#fff;color:var(--txt);line-height:1.6;
+}
+
+/* ─── header ─── */
+header{
+  position:sticky;top:0;z-index:90;
+  background:#fff;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:.7rem;padding:1rem 1.4rem
+}
+header img{width:28px}
+header span{font-weight:600}
+
+/* ─── hero ─── */
+.hero{
+  position:relative;height:58vh;min-height:400px;overflow:hidden;
+  color:#fff;display:flex;align-items:flex-end
+}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 40% 35%,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 70%),
+    linear-gradient(90deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,0) 55%);
+}
+.hero-inner{position:relative;z-index:2;max-width:720px;padding:2.5rem 1.8rem}
+.badge{
+  display:inline-block;background:var(--blue);padding:.34rem .85rem;
+  font-size:.75rem;font-weight:600;border-radius:6px;letter-spacing:.03em;
+  margin-bottom:.9rem
+}
+h1{
+  font-size:clamp(2.3rem,5vw,3.6rem);line-height:1.12;font-weight:720;
+  -webkit-text-stroke:1.2px rgba(0,0,0,.25);
+  text-shadow:0 4px 16px rgba(0,0,0,.6)
+}
+
+/* ─── spotlight ─── */
+.spotlight{
+  max-width:740px;margin:-40px auto 3rem;position:relative;z-index:10;
+  background:#fff;border:1px solid var(--border);border-radius:20px;
+  padding:2rem 2.2rem;
+  box-shadow:0 18px 40px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.6);
+  animation:drop-in .6s .15s both cubic-bezier(.25,.8,.3,1)
+}
+.spotlight::before{
+  content:'';position:absolute;top:0;left:0;width:100%;height:2px;
+  border-top-left-radius:20px;border-top-right-radius:20px;
+  background:linear-gradient(90deg,var(--blue) 0%,#00b8ff 100%);
+}
+@keyframes drop-in{0%{opacity:0;transform:translateY(44px)}100%{opacity:1;transform:none}}
+
+.stars{display:flex;gap:.25rem;margin-bottom:1.1rem}
+.stars svg{
+  width:22px;height:22px;fill:url(#gold);
+  animation:shine 5s linear infinite
+}
+@keyframes shine{0%{filter:hue-rotate(0)}50%{filter:hue-rotate(20deg)}100%{filter:hue-rotate(0)}}
+.spotlight p{font-size:1.125rem;font-weight:500}
+
+/* ─── cards gen ─── */
+.card{
+  background:#fff;border-radius:20px;
+  box-shadow:0 18px 34px rgba(0,0,0,.08);
+  padding:2.2rem 2.1rem;margin-bottom:2.3rem
+}
+.card h2{font-size:1.42rem;margin-bottom:1rem;font-weight:700}
+
+/* ── tabla técnica ── */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.93rem}
+th,td{padding:.65rem .8rem;border-bottom:1px solid var(--border)}
+th{background:#fbfbfc;text-align:left}
+tr:hover td{background:#fbfbfc}
+
+/* ── pros & cons ── */
+.proscons{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.6rem}
+.p-list{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.p-list li{padding-left:1.35rem;position:relative}
+.p-list li::before{content:'+';left:0;top:0;position:absolute;color:var(--blue);font-weight:700}
+.c-list li::before{content:'—';color:#d00000}
+
+/* ── timeline ── */
+.timeline-wrap{
+  background:#fbfbfc;border-radius:20px;padding:2.2rem 1.7rem;
+  box-shadow:0 14px 32px rgba(0,0,0,.06)
+}
+.timeline{position:relative;list-style:none;margin:0;padding:0}
+.timeline::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;width:4px;
+  background:linear-gradient(#c9d6ff,var(--blue));transform:translateX(-50%)
+}
+.tl-item{position:relative;display:flex;align-items:center;
+  gap:1.15rem;margin-bottom:2.3rem}
+.tl-item:last-child{margin:0}
+.tl-item:nth-child(odd){flex-direction:row-reverse}
+.tl-img{width:140px;flex-shrink:0;border-radius:16px;
+  box-shadow:0 6px 14px rgba(0,0,0,.05)}
+.tl-content{
+  background:#fff;border-radius:16px;padding:1rem 1.25rem;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+  max-width:calc(50% - 100px)
+}
+.tl-item:nth-child(odd) .tl-content{text-align:right}
+.tl-time{
+  position:absolute;left:50%;transform:translate(-50%,-50%);
+  width:60px;height:60px;border-radius:50%;background:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--blue);
+  box-shadow:0 0 0 6px #fff inset,0 4px 12px rgba(0,0,0,.08);
+  transition:.3s
+}
+.tl-item:hover .tl-time{transform:translate(-50%,-50%) scale(1.08)}
+@media(max-width:780px){
+  .tl-item,.tl-item:nth-child(odd){flex-direction:column}
+  .tl-content{max-width:100%;text-align:left}
+  .timeline::before{left:26px}
+  .tl-time{left:26px;transform:translate(-50%,-50%) scale(.9)}
+}
+
+/* ── FAQ / tweet / share / CTA ── */
+details{border-top:1px solid var(--border);padding:1rem 0}
+details summary{font-weight:600;cursor:pointer}
+details[open] summary{color:var(--blue)}
+.tweet{border:1px solid var(--border);border-radius:14px;padding:1rem;background:#fbfbfc;margin-bottom:2.4rem}
+.share{display:flex;justify-content:center;gap:.9rem;margin-top:1.2rem}
+.share a{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:#fbfbfc;transition:.3s
+}
+.share a:hover{background:var(--blue)}
+.share svg{width:22px;height:22px;fill:var(--blue)}
+.share a:hover svg{fill:#fff}
+.cta{text-align:center;margin:2.6rem 0}
+.cta a{
+  border:2px solid var(--blue);border-radius:999px;
+  padding:.9rem 2.4rem;font-weight:600;text-decoration:none;color:var(--blue);
+  transition:.3s
+}
+.cta a:hover{background:var(--blue);color:#fff}
+
+/* ── scroll reveal (gen) ── */
+.reveal{opacity:0;transform:translateY(46px);
+  transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* ── responsive hero − pequeño ── */
+@media(max-width:600px){.hero{height:52vh}.spotlight{margin-top:-32px;padding:1.8rem}}
+</style>
+</head>
+<body>
+
+<header><img src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?202105211049" alt="Apple"><span>Apple Blog</span></header>
+
+<!-- Hero -->
+<section class="hero">
+  <img src="iphone-recap.png" alt="">
+  <div class="hero-inner">
+    <span class="badge">Hands-on · Apple Digital Experience 2025</span>
+    <h1>iPhone 15 Pro — el nuevo titanio a prueba</h1>
+  </div>
+</section>
+
+<!-- Spotlight -->
+<div class="spotlight">
+  <div class="stars">
+    <svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star"/></svg><svg><use href="#star-half"/></svg>
+  </div>
+  <p>El acabado en titanio se siente premium y más ligero, el <strong>A17 Pro</strong> derrite benchmarks y el nuevo <strong>Action Button</strong> simplifica mi flujo de trabajo. La transición a USB-C es <em>chef’s kiss</em>. Contras: zoom 5× solo en el Pro Max y precio de vértigo.</p>
+</div>
+
+<!-- Contenido principal -->
+<article>
+
+  <!-- Ficha técnica -->
+  <div class="card reveal">
+    <h2>Ficha técnica rápida</h2>
+    <div class="table-wrap"><table>
+      <tr><th>Chip</th><td>A17 Pro (3 nm)</td><th>RAM</th><td>8 GB</td></tr>
+      <tr><th>Pantalla</th><td>6,1” OLED 120 Hz</td><th>Brillo pico</th><td>2 000 nits</td></tr>
+      <tr><th>Cámara principal</th><td>48 MP f/1.78</td><th>Zoom óptico</th><td>5× (Pro Max)</td></tr>
+      <tr><th>USB-C</th><td>3.2 Gen 2 (10 Gb/s)</td><th>Batería vídeo</th><td>29 h</td></tr>
+    </table></div>
+  </div>
+
+  <!-- Pros / Contras -->
+  <div class="card reveal">
+    <h2>Lo bueno y lo que podría mejorar</h2>
+    <div class="proscons">
+      <div><h3>✨ Highlights</h3>
+        <ul class="p-list">
+          <li>Diseño titanio ligero</li>
+          <li>Action Button configurable</li>
+          <li>USB-C rapidísimo</li>
+          <li>Modo retrato en vivo</li>
+        </ul>
+      </div>
+      <div><h3>🤏 A pulir</h3>
+        <ul class="p-list c-list">
+          <li>Zoom 5× solo Pro Max</li>
+          <li>Titanio natural delicado</li>
+          <li>Precio elevado</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline-wrap reveal">
+    <h2 style="margin-bottom:1.3rem">Mi vlog, minuto a minuto</h2>
+    <ul class="timeline">
+      <li class="tl-item">
+        <span class="tl-time">10:15</span>
+        <img src="iphone-camera-demo.png" alt class="tl-img">
+        <div class="tl-content"><h3>Retrato HDR</h3><p>Bokeh y luz de relleno en tiempo real.</p></div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-time">10:45</span>
+        <img src="iphone-flatlay.png" alt class="tl-img">
+        <div class="tl-content"><h3>Flat-lay VIP kit</h3><p>iPhone, pin titanio y AirPods Max listos para X.</p></div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-time">11:30</span>
+        <img src="iphone-selfie.png" alt class="tl-img">
+        <div class="tl-content"><h3>Selfie pastel</h3><p>Macarons + A17 Pro = foto ultra-dulce.</p></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- FAQ -->
+  <div class="card reveal">
+    <h2>Preguntas rápidas</h2>
+    <details><summary>¿El titanio se calienta?</summary><p>Tras 20 min grabando 4K60 la trasera estaba tibia (~35 °C).</p></details>
+    <details><summary>¿USB-C funciona con monitores?</summary><p>Sí: 4K 60 Hz sin adaptador.</p></details>
+    <details><summary>¿Cómo configuro el Action Button?</summary><p>Ajustes → Action Button → Cámara, Atajos, Linterna…</p></details>
+    <details><summary>¿MagSafe Duo sigue valiendo?</summary><p>Sigue siendo compatible (15 W).</p></details>
+  </div>
+
+  <!-- Tweet -->
+  <div class="tweet reveal">
+    <p>“Apple lo volvió a hacer: titanio, ray-tracing y Action Button… en tu bolsillo.”</p>
+    <span>— @TechPablo · #AppleDigitalExperience</span>
+  </div>
+
+  <!-- Share -->
+  <div class="share reveal">
+    <a href="https://twitter.com/intent/tweet?text=Review%20iPhone15Pro%20https://mi.link" target="_blank" aria-label="X">
+      <svg viewBox="0 0 24 24"><path d="M22 5.92 12.5 18.42H9.7L1.7 5.92h5.3L12 14.42l6.3-8.5z"/></svg>
+    </a>
+    <a href="https://instagram.com/TechPablo" target="_blank" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><path d="M7 2C4 2 2 4 2 7v10c0 3 2 5 5 5h10c3 0 5-2 5-5V7c0-3-2-5-5-5H7zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
+    </a>
+    <a href="https://youtube.com/@TechPablo" target="_blank" aria-label="YouTube">
+      <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.8 2.8 0 0 0-1.96-1.96C18.88 4 12 4 12 4S5.12 4 3.42 4.46a2.8 2.8 0 0 0-1.96 1.96A29.9 29.9 0 0 0 1 12a29.9 29.9 0 0 0 .46 5.58 2.8 2.8 0 0 0 1.96 1.96C5.12 20 12 20 12 20s6.88 0 8.58-.46a2.8 2.8 0 0 0 1.96-1.96A29.9 29.9 0 0 0 23 12a29.9 29.9 0 0 0-.46-5.58ZM10 15l5-3-5-3v6z"/></svg>
+    </a>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta reveal"><a href="https://instagram.com/TechPablo" target="_blank">Mira mis stories completas</a></div>
+
+</article>
+
+<!-- SVG defs -->
+<svg style="display:none">
+  <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffe27a"/><stop offset="100%" stop-color="#f7b338"/>
+  </linearGradient>
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21 16.54 14 22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></symbol>
+  <symbol id="star-half" viewBox="0 0 24 24"><path d="M12 2 9.19 8.62 2 9.24l5.46 4.76L5.82 21 12 17.27V2z"/></symbol>
+</svg>
+
+<!-- Reveal script -->
+<script>
+const io=new IntersectionObserver(
+  e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),
+  {threshold:.25}
+);
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

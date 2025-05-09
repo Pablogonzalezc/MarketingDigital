@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Así fue probar Apple Vision Pro — Review de @TechPablo</title>
+
+<style>
+/* —— variables —— */
+:root{
+  --blue:#0071e3;
+  --rail:#dfe7ff;
+  --gray-025:#fbfbfc;
+  --gray-050:#f5f5f7;
+  --gray-300:#e5e5e5;
+  --gray-900:#1d1d1f;
+}
+
+/* —— reset —— */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#fff;color:var(--gray-900);line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* —— helper fade-up —— */
+.reveal{opacity:0;transform:translateY(48px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* —— header —— */
+header{
+  position:sticky;top:0;z-index:90;display:flex;align-items:center;gap:.6rem;
+  padding:1rem 1.2rem;border-bottom:1px solid var(--gray-300);background:#fff;
+  transition:box-shadow .3s ease
+}
+header.scrolled{box-shadow:0 4px 14px rgba(0,0,0,.08)}
+header img{width:28px}header span{font-weight:600}
+
+/* —— hero —— */
+.hero{
+  position:relative;height:64vh;min-height:420px;display:flex;align-items:flex-end;
+  color:#fff;background:url('vision-recap.png') center/cover fixed no-repeat;overflow:hidden
+}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.7) 100%)}
+.hero-content{position:relative;padding:2rem 1.5rem;max-width:900px;z-index:1}
+.hero h1{font-size:clamp(2rem,4vw,3.2rem)}
+
+/* —— layout —— */
+article{max-width:960px;margin:2rem auto;padding:0 1.2rem;display:flex;flex-direction:column;gap:2rem}
+
+/* —— badge —— */
+.badge{display:inline-block;background:var(--blue);color:#fff;font-size:.78rem;font-weight:600;padding:.22rem .6rem;border-radius:6px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:.5rem}
+
+/* —— cards —— */
+.card{background:#fff;border-radius:20px;box-shadow:0 10px 26px rgba(0,0,0,.06);padding:2rem 1.9rem}
+.card h2{margin-bottom:.9rem;font-size:1.42rem}
+
+/* —— stars —— */
+.stars{display:flex;gap:.25rem;margin-bottom:.8rem}
+.stars svg{width:22px;height:22px;fill:url(#g-star);animation:shimmer 4s linear infinite}
+@keyframes shimmer{0%{filter:hue-rotate(0)}50%{filter:hue-rotate(25deg)}100%{filter:hue-rotate(0)}}
+
+/* —— pros / cons —— */
+.proscons{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.p-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.5rem}
+.p-list li{padding-left:1.3rem;position:relative}
+.p-list li::before{content:'+';position:absolute;left:0;top:0;color:var(--blue);font-weight:700}
+.c-list li::before{content:'—';color:#d00000}
+
+/* —— tabla, FAQ, tweet, share, CTA —— */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.92rem;margin:.5rem 0}
+th,td{padding:.55rem .65rem;border-bottom:1px solid var(--gray-300)}
+th{background:var(--gray-050);text-align:left}
+details{border-top:1px solid var(--gray-300);padding:1rem 0}
+details summary{font-weight:600;cursor:pointer}details[open] summary{color:var(--blue)}
+.tweet{border:1px solid var(--gray-300);border-radius:14px;padding:1rem;background:var(--gray-050)}
+.share{display:flex;justify-content:center;gap:.8rem;margin-top:1.5rem}
+.share a{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--gray-050);transition:.3s}
+.share a:hover{background:var(--blue)}.share svg{width:20px;height:20px;fill:var(--blue)}
+.share a:hover svg{fill:#fff}
+.cta{text-align:center;margin:2.5rem 0}
+.cta a{border:2px solid var(--blue);border-radius:999px;padding:.85rem 2.3rem;font-weight:600;text-decoration:none;color:var(--blue);transition:.3s}
+.cta a:hover{background:var(--blue);color:#fff}
+
+/* —— timeline —— */
+.timeline-wrap{background:var(--gray-025);border-radius:18px;padding:2rem 1.5rem;box-shadow:0 8px 22px rgba(0,0,0,.05)}
+.timeline{position:relative;margin:0;list-style:none;padding-left:0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:4px;background:linear-gradient(var(--rail),var(--blue));transform:translateX(-50%)}
+.tl-item{position:relative;display:flex;align-items:center;margin-bottom:2.2rem;gap:1rem}
+.tl-item:nth-child(odd){flex-direction:row-reverse}
+.tl-item:last-child{margin-bottom:0}
+.tl-img{width:140px;border-radius:14px;flex-shrink:0;box-shadow:0 6px 12px rgba(0,0,0,.06);transition:transform .4s ease}
+.tl-item:hover .tl-img{transform:scale(1.06)}
+.tl-content{background:#fff;border-radius:14px;padding:1rem 1.2rem;box-shadow:0 6px 14px rgba(0,0,0,.04);max-width:calc(50% - 100px)}
+.tl-item:nth-child(odd) .tl-content{text-align:right}
+.tl-time{position:absolute;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--blue);box-shadow:0 0 0 6px #fff inset,0 4px 12px rgba(0,0,0,.08);transition:.3s}
+.tl-item:hover .tl-time{transform:translate(-50%,-50%) scale(1.08)}
+@media(max-width:800px){
+  .tl-item,.tl-item:nth-child(odd){flex-direction:column}
+  .tl-content{max-width:100%;text-align:left}
+  .timeline::before{left:24px}
+  .tl-time{left:24px;transform:translate(-50%,-50%) scale(.9)}
+}
+@media(max-width:600px){.hero{height:55vh}}
+
+/* —— back-to-top button —— */
+#topBtn{
+  position:fixed;right:24px;bottom:24px;width:46px;height:46px;border-radius:50%;
+  background:var(--blue);color:#fff;border:none;cursor:pointer;font-size:24px;display:none;
+  box-shadow:0 4px 12px rgba(0,0,0,.15);transition:transform .3s
+}
+#topBtn:hover{transform:scale(1.08)}
+</style>
+</head>
+<body>
+
+<header><img src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?202105211049" alt><span>Apple Blog</span></header>
+
+<section class="hero"><div class="hero-content"><div class="badge">Review evento</div><h1>Apple Vision Pro a prueba — ¡mis primeras 4 h con él!</h1></div></section>
+
+<article>
+
+  <div class="card reveal">
+    <h2>¿Valió la pena el hype?</h2>
+    <div class="stars"><svg viewBox="0 0 24 24"><use href="#star"/></svg><svg viewBox="0 0 24 24"><use href="#star"/></svg><svg viewBox="0 0 24 24"><use href="#star"/></svg><svg viewBox="0 0 24 24"><use href="#star"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.3l6.18 4.02-1.64-7.03L21 9.24l-7.19-.62L12 2z"/></svg></div>
+    <p>Vision Pro cambió mi percepción del escritorio digital…</p>
+  </div>
+
+  <div class="card reveal"><h2>Ficha técnica rápida</h2><div class="table-wrap"><table>
+    <tr><th>Pantallas</th><td>Micro-OLED 4 K × 2</td><th>Chip</th><td>M2 + R1</td></tr>
+    <tr><th>Sensores</th><td>12 cámaras · LiDAR</td><th>Optic ID</th><td>✓ Iris scan</td></tr>
+    <tr><th>Batería</th><td>≈ 2 h uso intenso</td><th>Peso</th><td>~ 600 g</td></tr>
+  </table></div></div>
+
+  <div class="card reveal"><h2>Lo mejor y lo mejorable</h2>
+    <div class="proscons">
+      <div><h3>👍 Pros</h3><ul class="p-list"><li>Pantallas 4K-por-ojo</li><li>Gestos + Optic ID</li><li>Vídeo espacial</li><li>Audio espacial</li></ul></div>
+      <div><h3>👀 Contras</h3><ul class="p-list c-list"><li>Peso tras 30 min</li><li>Batería externa</li><li>Pocas apps nativas</li></ul></div>
+    </div>
+  </div>
+
+  <!-- timeline -->
+  <div class="timeline-wrap reveal"><h2 style="margin-bottom:1.4rem">Mi jornada resumida</h2>
+    <ul class="timeline">
+      <li class="tl-item">
+        <span class="tl-time">09:45</span>
+        <img src="vision-hands.png" alt class="tl-img">
+        <div class="tl-content"><h3>Check-in &amp; calibración</h3><p>Optic ID listo en 2 min; visor impecable y banda superior incluida.</p></div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-time">10:30</span>
+        <img src="vision-selfie.png" alt class="tl-img">
+        <div class="tl-content"><h3>Selfie arcoíris</h3><p>El visor refleja la cúpula LED: mi foto más colorida del año.</p></div>
+      </li>
+      <li class="tl-item">
+        <span class="tl-time">11:15</span>
+        <img src="vision-goodie.png" alt class="tl-img">
+        <div class="tl-content"><h3>Gift bag exclusiva</h3><p>Pin Vision Pro y 3 meses de Apple One Fitness+ para entrenar en realidad mixta.</p></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- FAQ -->
+  <div class="card reveal"><h2>Preguntas frecuentes</h2>
+    <details><summary>¿Marea tras uso prolongado?</summary><p>Usé Vision Pro 40 min sin mareos; Apple recomienda pausas cada hora.</p></details>
+    <details><summary>¿Sirve para gaming serio?</summary><p>Apple Arcade ya funciona y Unity ha confirmado soporte para VR-AAA.</p></details>
+    <details><summary>¿Cuánto tarda en cargarse la batería externa?</summary><p>≈ 1 h 10 min de 0 → 100 % con cargador USB-C de 30 W.</p></details>
+    <details><summary>¿Hay modelos con más memoria?</summary><p>Se venderá en 256 GB, 512 GB y 1 TB.</p></details>
+    <details><summary>Precio y disponibilidad</summary><p>US$ 3 499 (EE. UU.) — llega a España “principios 2026”.</p></details>
+  </div>
+
+  <div class="tweet reveal"><p>“Apple acaba de redefinir la palabra monitor.”</p><span>— @TechPablo, 10 may 2025</span></div>
+
+  <div class="share reveal">
+    <a href="https://twitter.com/intent/tweet?text=Review%20Vision%20Pro%20https://mi.link" target="_blank" aria-label="X"><svg viewBox="0 0 24 24"><path d="M22 5.92l-9.5 12.5H9.7L1.7 5.92h5.3L12 14.42l6.3-8.5z"/></svg></a>
+    <a href="https://instagram.com/TechPablo" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2C4 2 2 4 2 7v10c0 3 2 5 5 5h10c3 0 5-2 5-5V7c0-3-2-5-5-5H7zm5 5a5 5 0 100 10 5 5 0 000-10z"/></svg></a>
+    <a href="https://youtube.com/@TechPablo" target="_blank" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.96-1.96C18.88 4 12 4 12 4s-6.88 0-8.58.46a2.78 2.78 0 00-1.96 1.96A29.9 29.9 0 001 12a29.9 29.9 0 00.46 5.58 2.78 2.78 0 001.96 1.96C5.12 20 12 20 12 20s6.88 0 8.58-.46a2.78 2.78 0 001.96-1.96A29.9 29.9 0 0023 12a29.9 29.9 0 00-.46-5.58zM10 15l5-3-5-3v6z"/></svg></a>
+  </div>
+
+  <div class="cta reveal"><a href="https://twitter.com/TechPablo" target="_blank">Sígueme para más reviews</a></div>
+
+</article>
+
+<!-- botón top -->
+<button id="topBtn" aria-label="Ir arriba">▲</button>
+
+<!-- SVG defs (estrella + gradiente) -->
+<svg style="display:none">
+  <linearGradient id="g-star" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#ffe27a"/><stop offset="100%" stop-color="#f7b338"/>
+  </linearGradient>
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21 16.54 14 22 9.24l-7.19-.62L12 2 9.19 8.62 2 9.24l5.46 4.73L5.82 21z"/></symbol>
+</svg>
+
+<!-- scripts -->
+<script>
+/* scroll-reveal */
+const io=new IntersectionObserver(e=>e.forEach(t=>t.isIntersecting&&t.target.classList.add('visible')), {threshold:.18});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* header shadow + top button */
+const header=document.querySelector('header');
+const btn=document.getElementById('topBtn');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  header.classList.toggle('scrolled',y>30);
+  btn.style.display=y>500?'block':'none';
+});
+
+/* top button */
+btn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+</script>
+
+</body>
+</html>
